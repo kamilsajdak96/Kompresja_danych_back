@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from . import imageTester
 from myapp.models import Image
-
+from .testCompression import compressingAlgorithm
 def index(request):
     response = json.dumps([{}])
     return HttpResponse(response, content_type='text/json')
@@ -25,7 +25,11 @@ def addImage(request):
         payload = json.loads(request.body)
         image_name = payload['image_name']
         print(image_name[22:])
+        text_file = open("Output.txt", "w")
+        text_file.write(image_name)
+        text_file.close()
         imageTester.test(image_name[22:])
+        compressingAlgorithm.test()
         image = Image(name=image_name)
         try:
             image.save()

@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('image', views.addImage),
-    path('<str:image_name>', views.getImage),
+    path('image/<str:image_name>', views.getImage),
 ]
